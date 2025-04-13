@@ -1,5 +1,7 @@
 package com.example.mini2.models;
 
+
+
 import jakarta.persistence.*;
 
 @Entity
@@ -24,7 +26,7 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(Double amount, String paymentMethod, Boolean paymentStatus, Trip trip) {
+    public Payment(Double amount, String paymentMethod, Boolean paymentStatus) {
         this.amount = amount;
         this.paymentMethod = paymentMethod;
         this.paymentStatus = paymentStatus;
