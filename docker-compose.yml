@@ -5,14 +5,18 @@ services:
       dockerfile: Dockerfile
     environment:
       spring.datasource.url: jdbc:postgresql://db:5432/mini2
+      spring.data.mongodb.uri: mongodb://root:example@mongo:27017/mini2?authSource=admin
+      spring.data.mongodb.database: mini2
     ports:
       - "8080:8080"
     depends_on:
       - db
+      - mongo
+      - mongo-express
     restart: always
 
-
-  postgres:
+  # Postgres
+  db:
     image: postgres
     environment:
       POSTGRES_PASSWORD: 1234
