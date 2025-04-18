@@ -1,8 +1,6 @@
 package com.example.mini2.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.ToString;
 
 import java.util.List;
 
@@ -16,10 +14,10 @@ public class Captain {
     private String name;
     private String licenseNumber;
     private double avg_rating_score;
-    @OneToMany(mappedBy = "captain")
-    @ToString.Exclude
-    @JsonIgnore
-    private List<Trip> trips;
+//    @OneToMany(mappedBy = "captain")
+//    @ToString.Exclude
+//    @JsonIgnore
+//    private List<Trip> trips;
 
     public Captain() {
     }
@@ -28,7 +26,7 @@ public class Captain {
         this.name = name;
         this.licenseNumber = licenseNumber;
         this.avg_rating_score = avg_rating_score;
-        this.trips = trips;
+//        this.trips = trips;
     }
 
     public Captain(long id, String name, String licenseNumber, Double avg_rating_score, List<Trip> trips) {
@@ -36,7 +34,7 @@ public class Captain {
         this.name = name;
         this.licenseNumber = licenseNumber;
         this.avg_rating_score = avg_rating_score;
-        this.trips = trips;
+//        this.trips = trips;
     }
 
     public long getId() {
@@ -71,11 +69,11 @@ public class Captain {
         this.avg_rating_score = avgRatingScore;
     }
 
-    public List<Trip> getTrips() {
-        return trips;
-    }
-
-    public void setTrips(List<Trip> trips) {
-        this.trips = trips;
-    }
+//    public List<Trip> getTrips() {
+//        return trips;
+//    }
+//
+//    public void setTrips(List<Trip> trips) {
+//        this.trips = trips;
+//    }
 }
