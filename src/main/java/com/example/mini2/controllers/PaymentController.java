@@ -37,6 +37,7 @@ public class PaymentController {
         }
         return payment;
     }
+
     @PutMapping("/update/{id}")
     public Payment updatePayment(@PathVariable Long id, @RequestBody Payment payment) {
         Payment existingPayment = paymentService.getPaymentById(id);
@@ -45,6 +46,7 @@ public class PaymentController {
         }
         return paymentService.updatePayment(id, payment);
     }
+
     @DeleteMapping("/delete/{id}")
     public String deletePayment(@PathVariable Long id) {
         if (paymentService.getPaymentById(id) == null) {
@@ -54,6 +56,7 @@ public class PaymentController {
         return "Payment with ID " + id + " has been deleted.";
     }
 
+    @GetMapping("/findByTripId")
     public List<Payment> findPaymentsByTripId(@RequestParam Long tripId) {
        return paymentService.findPaymentsByTripId(tripId);
     }

@@ -23,7 +23,6 @@ public class Payment {
     @JoinColumn(name = "trip_id", nullable = false, unique = true)
     private  Trip trip;
 
-    // Constructors
     public Payment() {
     }
 
