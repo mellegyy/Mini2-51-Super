@@ -32,7 +32,7 @@ public class PaymentService {
 
 
     public Payment updatePayment(Long id, Payment updatedPayment) {
-     /*   Optional<Payment> existing = paymentRepository.findById(id);
+       Optional<Payment> existing = paymentRepository.findById(id);
         if (existing.isPresent()) {
             Payment payment = existing.get();
             payment.setAmount(updatedPayment.getAmount());
@@ -43,20 +43,15 @@ public class PaymentService {
         } else {
             return null;
         }
-     */
-        return  paymentRepository.save(updatedPayment); //dummy return
     }
 
     public void deletePayment(Long id) {
         paymentRepository.deleteById(id);
     }
-
-    // 8.4.2.6 Find Payments By Trip ID
-   // public List<Payment> findPaymentsByTripId(Long tripId) {
-        // Since findByTripId returns a single payment, wrap it into a list if found
-     //   Payment payment = paymentRepository.findByTripId(tripId);
-       // return payment != null ? List.of(payment) : List.of();
-  //  }
+     public List<Payment> findPaymentsByTripId(Long tripId) {
+       Payment payment = paymentRepository.findByTripId(tripId);
+        return payment != null ? List.of(payment) : List.of();
+    }
 
     public List<Payment> findByAmountThreshold(Double threshold) {
         return paymentRepository.findByAmountGreaterThan(threshold);

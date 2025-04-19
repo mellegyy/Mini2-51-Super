@@ -1,8 +1,9 @@
 package com.example.mini2.models;
 
-
-
 import jakarta.persistence.*;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+
 
 @Entity
 @Table(name = "payments")
@@ -18,9 +19,9 @@ public class Payment {
 
     private Boolean paymentStatus; // true if paid
 
-   // @OneToOne
-   // @JoinColumn(name = "trip_id", nullable = false, unique = true)
-   // private Trip trip;
+    @OneToOne
+    @JoinColumn(name = "trip_id", nullable = false, unique = true)
+    private  Trip trip;
 
     // Constructors
     public Payment() {
@@ -30,10 +31,9 @@ public class Payment {
         this.amount = amount;
         this.paymentMethod = paymentMethod;
         this.paymentStatus = paymentStatus;
-       // this.trip = trip;
+        this.trip = trip;
     }
 
-    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -63,11 +63,11 @@ public class Payment {
         this.paymentStatus = paymentStatus;
     }
 
-   /* public Trip getTrip() {
+   public Trip getTrip() {
         return trip;
     }
 
     public void setTrip(Trip trip) {
         this.trip = trip;
-    }*/
+    }
 }

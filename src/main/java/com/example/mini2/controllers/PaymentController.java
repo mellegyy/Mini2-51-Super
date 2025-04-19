@@ -44,7 +44,7 @@ public class PaymentController {
             throw new ResourceNotFoundException(" payment not found");
         }
         return paymentService.updatePayment(id, payment);
-    } // sebk mnha b3den
+    }
     @DeleteMapping("/delete/{id}")
     public String deletePayment(@PathVariable Long id) {
         if (paymentService.getPaymentById(id) == null) {
@@ -54,11 +54,9 @@ public class PaymentController {
         return "Payment with ID " + id + " has been deleted.";
     }
 
-    // 9.4.2.6 Find Payments By Trip ID
-    //@GetMapping("/findByTripId")
-   // public List<Payment> findPaymentsByTripId(@RequestParam Long tripId) {
- //       return paymentService.findPaymentsByTripId(tripId);
-   // }
+    public List<Payment> findPaymentsByTripId(@RequestParam Long tripId) {
+       return paymentService.findPaymentsByTripId(tripId);
+    }
 
     @GetMapping("/findByAmountThreshold")
     public List<Payment> findPaymentsWithAmountGreaterThan(@RequestParam Double threshold) {

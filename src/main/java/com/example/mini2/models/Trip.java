@@ -18,6 +18,10 @@ public class Trip {
 
     private Double tripCost;
 
+    @OneToOne(mappedBy = "trip", cascade = CascadeType.ALL)
+    private Payment payment;
+
+
     @ManyToOne
     @JoinColumn(name = "captain_id")
     private Captain captain;
