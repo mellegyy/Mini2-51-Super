@@ -1,5 +1,7 @@
 package com.example.mini2;
 
+
+import com.example.mini2.models.Payment;
 import org.springframework.beans.factory.annotation.Value;
 import com.example.mini2.models.*;
 import com.example.mini2.repositories.*;
@@ -340,7 +342,7 @@ class Mini2ApplicationTests {
 	@Test
 	public void testControllerGetPaymentById() throws NoSuchFieldException, ClassNotFoundException, IllegalAccessException {
 		Payment payment = new Payment(200.0, "Credit Card", true);
-		paymentService.addPayment(payment); // Add to database for controller testing
+		paymentService.addPayment(payment);
 		ResponseEntity<Payment> response = restTemplate.getForEntity(BASE_URL_PAYMENT + "/" + ((Long) getID(PaymentPath).get(payment)), Payment.class);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertNotNull(response.getBody());

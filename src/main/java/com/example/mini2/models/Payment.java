@@ -1,12 +1,13 @@
 package com.example.mini2.models;
 
-import jakarta.persistence.*;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-
+import jakarta.persistence.OneToOne;
 
 @Entity
-@Table(name = "payments")
 public class Payment {
 
     @Id
@@ -15,13 +16,13 @@ public class Payment {
 
     private Double amount;
 
-    private String paymentMethod; // e.g., "card", "cash"
+    private String paymentMethod;
 
-    private Boolean paymentStatus; // true if paid
+    private Boolean paymentStatus;
 
     @OneToOne
-    @JoinColumn(name = "trip_id", nullable = false, unique = true)
-    private  Trip trip;
+    @JoinColumn(name = "trip_id", unique = true)
+    private Trip trip;
 
     public Payment() {
     }
@@ -30,9 +31,14 @@ public class Payment {
         this.amount = amount;
         this.paymentMethod = paymentMethod;
         this.paymentStatus = paymentStatus;
-        this.trip = trip;
     }
 
+    public Payment(Double amount, String paymentMethod, Boolean paymentStatus, Trip trip) {
+        this.amount = amount;
+        this.paymentMethod = paymentMethod;
+        this.paymentStatus = paymentStatus;
+        this.trip = trip;
+    }
 
     public Long getId() {
         return id;
@@ -62,7 +68,7 @@ public class Payment {
         this.paymentStatus = paymentStatus;
     }
 
-   public Trip getTrip() {
+    public Trip getTrip() {
         return trip;
     }
 

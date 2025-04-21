@@ -30,19 +30,6 @@ public class CaptainService {
         if (existingCaptain != null) {
             throw new RuntimeException("Captain with the same license number already exists");
         }
-//        List<Trip> trips = tripService.getAllTrips();
-//        for (Trip captainTrip : captain.getTrips()) {
-//            boolean exists = false;
-//            for (Trip trip : trips){
-//                if(captainTrip.equals(trip)) {
-//                    exists = true;
-//                    break;
-//                }
-//            }
-//            if (!exists) {
-//                tripService.addTrip(captainTrip);
-//            }
-//        }
         return captainRepository.save(captain);
     }
 

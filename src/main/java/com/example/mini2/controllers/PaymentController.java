@@ -2,7 +2,6 @@ package com.example.mini2.controllers;
 
 import com.example.mini2.models.Payment;
 import com.example.mini2.services.PaymentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,6 @@ public class PaymentController {
 
     private final PaymentService paymentService;
 
-    @Autowired
     public PaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;
     }
@@ -40,9 +38,9 @@ public class PaymentController {
 
     @PutMapping("/update/{id}")
     public Payment updatePayment(@PathVariable Long id, @RequestBody Payment payment) {
-        Payment existingPayment = paymentService.getPaymentById(id);
-        if (existingPayment == null) {
-            throw new ResourceNotFoundException(" payment not found");
+        Payment existing = paymentService.getPaymentById(id);
+        if (existing == null) {
+            throw new ResourceNotFoundException("Payment with ID " + id + " not found.");
         }
         return paymentService.updatePayment(id, payment);
     }
@@ -58,7 +56,7 @@ public class PaymentController {
 
     @GetMapping("/findByTripId")
     public List<Payment> findPaymentsByTripId(@RequestParam Long tripId) {
-       return paymentService.findPaymentsByTripId(tripId);
+        return paymentService.findPaymentsByTripId(tripId);
     }
 
     @GetMapping("/findByAmountThreshold")

@@ -1,8 +1,9 @@
 package com.example.mini2.services;
 
 import com.example.mini2.models.Payment;
+import com.example.mini2.models.Trip;
 import com.example.mini2.repositories.PaymentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.mini2.repositories.TripRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,13 +13,21 @@ import java.util.Optional;
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;
+    private final TripRepository tripRepository;
 
-    @Autowired
-    public PaymentService(PaymentRepository paymentRepository) {
+    public PaymentService(PaymentRepository paymentRepository, TripRepository tripRepository) {
         this.paymentRepository = paymentRepository;
+        this.tripRepository = tripRepository;
     }
 
     public Payment addPayment(Payment payment) {
+        if (payment.getTrip() != null && payment.getTrip().getId() != null) {
+            Trip trip = tripRepository.findById(payment.getTrip().getId()).orElse(null);
+            if (trip == null) {
+                throw new IllegalArgumentException("Trip not found with id: " + payment.getTrip().getId());
+            }
+            payment.setTrip(trip);
+        }
         return paymentRepository.save(payment);
     }
 
@@ -30,26 +39,24 @@ public class PaymentService {
         return paymentRepository.findById(id).orElse(null);
     }
 
-
     public Payment updatePayment(Long id, Payment updatedPayment) {
-       Optional<Payment> existing = paymentRepository.findById(id);
-        if (existing.isPresent()) {
-            Payment payment = existing.get();
-            payment.setAmount(updatedPayment.getAmount());
-            payment.setPaymentMethod(updatedPayment.getPaymentMethod());
-            payment.setPaymentStatus(updatedPayment.getPaymentStatus());
-            payment.setTrip(updatedPayment.getTrip());
-            return paymentRepository.save(payment);
-        } else {
-            return null;
-        }
+        return paymentRepository.findById(id)
+                .map(existing -> {
+                    existing.setAmount(updatedPayment.getAmount());
+                    existing.setPaymentMethod(updatedPayment.getPaymentMethod());
+                    existing.setPaymentStatus(updatedPayment.getPaymentStatus());
+                    existing.setTrip(updatedPayment.getTrip());
+                    return paymentRepository.save(existing);
+                })
+                .orElse(null);
     }
 
     public void deletePayment(Long id) {
         paymentRepository.deleteById(id);
     }
-     public List<Payment> findPaymentsByTripId(Long tripId) {
-       Payment payment = paymentRepository.findByTripId(tripId);
+
+    public List<Payment> findPaymentsByTripId(Long tripId) {
+        Payment payment = paymentRepository.findByTripId(tripId);
         return payment != null ? List.of(payment) : List.of();
     }
 
