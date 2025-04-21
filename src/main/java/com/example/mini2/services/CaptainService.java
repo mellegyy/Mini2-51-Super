@@ -4,6 +4,7 @@ import com.example.mini2.models.Captain;
 import com.example.mini2.models.Trip;
 import com.example.mini2.repositories.CaptainRepository;
 import com.example.mini2.repositories.TripRepository;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,9 @@ public class CaptainService {
     }
 
     public Captain addCaptain(Captain captain){
+        if(captain == null){
+            throw new InvalidDataAccessApiUsageException("Invalid captain data");
+        }
         if (captain.getName() == null || captain.getAvg_rating_score() < 0 || captain.getLicenseNumber() == null) {
             throw new IllegalArgumentException("Invalid captain data");
         }
@@ -48,7 +52,7 @@ public class CaptainService {
 
     public Captain getCaptainById(Long id){
         if (id == null) {
-            throw new IllegalArgumentException("Invalid captain ID");
+            throw new InvalidDataAccessApiUsageException("Invalid captain ID");
         }
         return captainRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Captain not found"));}
@@ -58,21 +62,17 @@ public class CaptainService {
             throw new IllegalArgumentException("Invalid rating.");
         }
         List<Captain> captains = captainRepository.findCaptainsWithRating(ratingThreshold);
-        if (captains.isEmpty()) {
-            throw new IllegalArgumentException("No Captains found");
-        }
+//        if (captains.isEmpty()) {
+//            throw new IllegalArgumentException("No Captains found");
+//        }
         return captains;
     }
 
-    public Captain getCaptainByLicenseNumber(String licenseNumber){
+    public Captain getCaptainByLicenseNumber(String licenseNumber) {
         if (licenseNumber == null) {
             throw new IllegalArgumentException("Invalid license number.");
         }
-        Captain captain = captainRepository.findByLicenseNumber(licenseNumber);
-        if (captain == null) {
-            throw new IllegalArgumentException("Captain not found");
-        }
-        return captain;
+        return captainRepository.findByLicenseNumber(licenseNumber); // Return null if not found
     }
 
 

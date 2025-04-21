@@ -121,11 +121,11 @@ class Mini2ApplicationTests {
 	public void setup() {
 		// Ensure all records are deleted
 
-		// paymentRepository.deleteAll();
-		// tripRepository.deleteAll();
+		paymentRepository.deleteAll();
+		tripRepository.deleteAll();
 		ratingRepository.deleteAll();
-		// captainRepository.deleteAll();
-		// customerRepository.deleteAll();
+		captainRepository.deleteAll();
+		customerRepository.deleteAll();
 	}
 	public static Field findFieldIgnoreCase(Class<?> clazz, String fieldName) {
 		Field[] declaredFields = clazz.getDeclaredFields();

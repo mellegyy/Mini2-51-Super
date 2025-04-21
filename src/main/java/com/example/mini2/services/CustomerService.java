@@ -4,6 +4,7 @@ package com.example.mini2.services;
 import com.example.mini2.models.Customer;
 import com.example.mini2.models.Trip;
 import com.example.mini2.repositories.CustomerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,12 +80,12 @@ public class CustomerService {
     }
 
     public void deleteCustomer(Long id){
-        if (id == null) {
-            throw new IllegalArgumentException("Invalid customer ID");
-        }
-        if (!customerRepository.existsById(id)) {
-            throw new RuntimeException("Customer not found");
-        }
+//        if (id == null) {
+//            throw new IllegalArgumentException("Invalid customer ID");
+//        }
+//        if (!customerRepository.existsById(id)) {
+//            throw new EntityNotFoundException("Customer not found");
+//        }
         customerRepository.deleteById(id);
     }
 
