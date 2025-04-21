@@ -24,6 +24,12 @@ public class Captain {
     public Captain() {
     }
 
+    public Captain(String name, String licenseNumber, double avg_rating_score) {
+        this.name = name;
+        this.licenseNumber = licenseNumber;
+        this.avg_rating_score = avg_rating_score;
+    }
+
     public Captain(String name, String licenseNumber, Double avg_rating_score, List<Trip> trips) {
         this.name = name;
         this.licenseNumber = licenseNumber;

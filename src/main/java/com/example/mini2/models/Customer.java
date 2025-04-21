@@ -25,6 +25,12 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(String name, String email, String phoneNumber) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Customer(String name, String email, String phoneNumber, List<Trip> trips) {
         this.name = name;
         this.email = email;

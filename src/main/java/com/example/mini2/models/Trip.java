@@ -28,6 +28,13 @@ public class Trip {
 
     public Trip() {}
 
+    public Trip(LocalDateTime tripDate, String origin, String destination, Double tripCost) {
+        this.tripDate = tripDate;
+        this.origin = origin;
+        this.destination = destination;
+        this.tripCost = tripCost;
+    }
+
     public Trip(LocalDateTime tripDate, String origin, String destination, Double tripCost, Captain captain, Customer customer) {
         this.tripDate = tripDate;
         this.origin = origin;
