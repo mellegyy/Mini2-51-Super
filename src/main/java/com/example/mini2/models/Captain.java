@@ -7,7 +7,7 @@ import lombok.ToString;
 import java.util.List;
 
 @Entity
-@Table(name = "captain")
+@Table(name = "captains")
 public class Captain {
 
     @Id

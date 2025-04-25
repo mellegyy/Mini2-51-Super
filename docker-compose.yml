@@ -1,7 +1,7 @@
 services:
   app:
     build:
-      context: ./
+      context: .
       dockerfile: Dockerfile
     environment:
       spring.datasource.url: jdbc:postgresql://db:5432/mini2

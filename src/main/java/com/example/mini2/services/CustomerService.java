@@ -25,11 +25,11 @@ public class CustomerService {
         if (customer.getName() == null || customer.getEmail() == null || customer.getPhoneNumber() == null) {
             throw new IllegalArgumentException("Invalid customer data");
         }
-        Customer existingCustomerEmail = customerRepository.findByEmail(customer.getEmail());
-        Customer existingCustomerPhone = customerRepository.findByPhoneNumber(customer.getPhoneNumber());
-        if (existingCustomerEmail != null || existingCustomerPhone != null) {
-            throw new RuntimeException("Customer already exists");
-        }
+//        Customer existingCustomerEmail = customerRepository.findByEmail(customer.getEmail());
+//        Customer existingCustomerPhone = customerRepository.findByPhoneNumber(customer.getPhoneNumber());
+//        if (existingCustomerEmail != null || existingCustomerPhone != null) {
+//            throw new RuntimeException("Customer already exists");
+//        }
 //        List<Trip> trips = tripService.getAllTrips();
 //        for (Trip customerTrip : customer.getTrips()) {
 //            boolean exists = false;

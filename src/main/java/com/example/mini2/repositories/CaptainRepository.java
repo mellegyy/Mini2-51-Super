@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface CaptainRepository extends JpaRepository<Captain, Long> {
 
-    @Query(value = "SELECT * FROM captain WHERE avg_rating_score > :threshold", nativeQuery = true)
+    @Query(value = "SELECT * FROM captains WHERE avg_rating_score > :threshold", nativeQuery = true)
     public List<Captain> findCaptainsWithRating(@Param("threshold") double threshold);
 
     public Captain findByLicenseNumber(String licenseNumber);
